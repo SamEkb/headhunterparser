@@ -1,6 +1,7 @@
 package ru.skilanov.io.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Класс модель вакансии.
@@ -51,7 +52,7 @@ public class Job {
     }
 
     /**
-     * Геттер.
+     * Геттер для ссылки.
      *
      * @return String
      */
@@ -60,7 +61,7 @@ public class Job {
     }
 
     /**
-     * Геттер.
+     * Геттер для наименования.
      *
      * @return String
      */
@@ -69,7 +70,7 @@ public class Job {
     }
 
     /**
-     * Геттер.
+     * Геттер для заработной платы.
      *
      * @return String
      */
@@ -78,7 +79,7 @@ public class Job {
     }
 
     /**
-     * Геттер.
+     * Геттер для наименования компании.
      *
      * @return String
      */
@@ -87,7 +88,7 @@ public class Job {
     }
 
     /**
-     * Геттер.
+     * Геттер для места нахождения.
      *
      * @return String
      */
@@ -96,7 +97,7 @@ public class Job {
     }
 
     /**
-     * Геттер.
+     * Геттер для даты публикации.
      *
      * @return String
      */
@@ -119,5 +120,24 @@ public class Job {
                 ", location='" + location + '\'' +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return Objects.equals(url, job.url) &&
+                Objects.equals(title, job.title) &&
+                Objects.equals(salary, job.salary) &&
+                Objects.equals(companyName, job.companyName) &&
+                Objects.equals(location, job.location) &&
+                Objects.equals(date, job.date);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(url, title, salary, companyName, location, date);
     }
 }
