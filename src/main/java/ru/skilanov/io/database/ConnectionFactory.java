@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Класс для подключения к базе данных.
  */
-public class ConnectionFactory {
+class ConnectionFactory {
     /**
      * Драйвер postgreSql
      */
@@ -31,7 +31,7 @@ public class ConnectionFactory {
     /**
      *
      */
-    public ConnectionFactory() {
+    protected ConnectionFactory() {
         try {
             Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {
@@ -45,7 +45,7 @@ public class ConnectionFactory {
      * @return соединение
      * @throws SQLException исключение
      */
-    public Connection getConnection() throws SQLException {
+    protected Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 }

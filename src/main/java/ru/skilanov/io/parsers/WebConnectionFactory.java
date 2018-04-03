@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Класс для соединения со страницей.
  */
-public class WebConnectionFactory {
+class WebConnectionFactory {
     /**
      * Ссылка на сайт к которым происходит соединение.
      */
@@ -26,7 +26,7 @@ public class WebConnectionFactory {
      * @param count int для смены страницы
      * @return html документ
      */
-    public Document getConnection(int count) {
+    protected Document getConnection(int count) {
         String url = HH_URL.concat(String.valueOf(count));
         try {
             return Jsoup
