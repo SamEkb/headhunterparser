@@ -7,6 +7,7 @@ import java.util.Objects;
  * Класс модель вакансии.
  */
 public class Job {
+    private int id;
     /**
      * Ссылка на вакансию.
      */
@@ -32,6 +33,16 @@ public class Job {
      */
     private Date date;
 
+    public Job(int id, String url, String title, String salary, String companyName, String location, Date date) {
+        this.id = id;
+        this.url = url;
+        this.title = title;
+        this.salary = salary;
+        this.companyName = companyName;
+        this.location = location;
+        this.date = date;
+    }
+
     /**
      * Конструктор инициализирующий вакансию.
      *
@@ -49,6 +60,14 @@ public class Job {
         this.companyName = companyName;
         this.location = location;
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -105,15 +124,12 @@ public class Job {
         return date;
     }
 
-    /**
-     * Метод преобразующий объект в строку.
-     *
-     * @return преобразованная в String вакансия.
-     */
+
     @Override
     public String toString() {
         return "Job{" +
-                "url='" + url + '\'' +
+                "id=" + id +
+                ", url='" + url + '\'' +
                 ", title='" + title + '\'' +
                 ", salary='" + salary + '\'' +
                 ", companyName='" + companyName + '\'' +
@@ -127,7 +143,8 @@ public class Job {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return Objects.equals(url, job.url) &&
+        return id == job.id &&
+                Objects.equals(url, job.url) &&
                 Objects.equals(title, job.title) &&
                 Objects.equals(salary, job.salary) &&
                 Objects.equals(companyName, job.companyName) &&
@@ -138,6 +155,6 @@ public class Job {
     @Override
     public int hashCode() {
 
-        return Objects.hash(url, title, salary, companyName, location, date);
+        return Objects.hash(id, url, title, salary, companyName, location, date);
     }
 }

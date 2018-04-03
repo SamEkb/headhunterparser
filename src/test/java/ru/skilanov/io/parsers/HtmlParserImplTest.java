@@ -6,9 +6,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import ru.skilanov.io.model.Job;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -18,7 +18,6 @@ import java.util.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
 
 /**
  * Класс тестирует парсинг страницы.
@@ -46,11 +45,16 @@ public class HtmlParserImplTest {
     private HtmlParserImpl parser;
 
     /**
+     * Соединение со страницей.
+     */
+    @Mock
+    private WebConnectionFactory webConnectionFactory;
+
+    /**
      * Метод инициализации перед тестами.
      */
     @Before
     public void setUp() throws IOException, URISyntaxException {
-        WebConnectionFactory webConnectionFactory = mock(WebConnectionFactory.class);
         parser = new HtmlParserImpl(webConnectionFactory);
 
         String simpleHTML = new String(Files.readAllBytes(Paths.get(getClass().getResource("/input.html").toURI())));
