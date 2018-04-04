@@ -10,6 +10,12 @@ import java.util.Date;
  * Класс конвертирует дату из строки.
  */
 public class DateConverter {
+
+    /**
+     * Константа регулярное выражение.
+     */
+    private static final String REGEX = "[\\u00A0\\s]+";
+
     /**
      * Метод преобразовывает строку в дату.
      *
@@ -35,7 +41,7 @@ public class DateConverter {
      * @return String первый элемент массива.
      */
     private String getDay(String date) {
-        return date.split("[\\u00A0\\s]+")[0];
+        return date.split(REGEX)[0];
     }
 
     /**
@@ -45,6 +51,6 @@ public class DateConverter {
      * @return String второй элемент массива.
      */
     private String getMonth(String date) {
-        return date.split("[\\u00A0\\s]+")[1];
+        return date.split(REGEX)[1];
     }
 }

@@ -1,32 +1,27 @@
 package ru.skilanov.io.database;
 
-import ru.skilanov.io.model.Job;
+import ru.skilanov.io.model.Vacancy;
 
 import java.util.List;
 
 /**
  * Интерфейс содержащий методы для работы с объектами класса Job
  */
-public interface JobDao {
-
-    /**
-     * Создание таблицы, если она не существует.
-     */
-    void create();
+public interface VacancyDao {
 
     /**
      * Ввод данных в балицу.
      *
-     * @param job Job
+     * @param vacancy Job
      */
-    void insert(Job job);
+    void insert(Vacancy vacancy);
 
     /**
      * Получение всех записей.
      *
      * @return List
      */
-    List<Job> getAll();
+    List<Vacancy> getAll();
 
     /**
      * Получение всех вакансий по наименованию компании.
@@ -34,7 +29,7 @@ public interface JobDao {
      * @param name String
      * @return List
      */
-    List<Job> findByCompanyName(String name);
+    List<Vacancy> findByCompanyName(String name);
 
     /**
      * Поиск вакансии по id.
@@ -42,7 +37,7 @@ public interface JobDao {
      * @param id int
      * @return Job
      */
-    Job findById(int id);
+    Vacancy findById(int id);
 
     /**
      * Удаление вакансии по id.

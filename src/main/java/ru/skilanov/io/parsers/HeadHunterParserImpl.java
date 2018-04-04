@@ -1,17 +1,20 @@
 package ru.skilanov.io.parsers;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import ru.skilanov.io.model.Job;
+import ru.skilanov.io.model.Vacancy;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Класс реализация интерйеса HtmlParser, который парсит вакансии.
  */
-public class HtmlParserImpl implements HtmlParser {
+public class HeadHunterParserImpl implements HtmlParser {
+
     /**
      * Запрос на получение вакансии.
      */
@@ -62,38 +65,24 @@ public class HtmlParserImpl implements HtmlParser {
             "> div[class=\"vacancy-serp-item__compensation\"]";
 
     /**
-     * Счетчик страниц.
-     */
-    public int pageCounter = 0;
-
-    /**
-     * Соединение с сайтом.
-     */
-    private WebConnectionFactory webConnectionFactory;
-
-    /**
-     * Конструктор.
+     * Метод возвращает вакансии содержащие в наименовании java.
      *
-     * @param webConnectionFactory WebConnectionFactory
+     * @param page String
+     * @return Set<Vacancy>
      */
-    public HtmlParserImpl(WebConnectionFactory webConnectionFactory) {
-        this.webConnectionFactory = webConnectionFactory;
-    }
+    public Set<Vacancy> parseVacations(String page) {
+        Set<Vacancy> vacancyList = new LinkedHashSet<>();
 
-    /**
-     * Метод возвращает лист всех вакансий в заголовках которых указано java
-     * @return LinkedHashSet
-     */
-    public Set<Job> getAllJavaJobs() {
-        Set<Job> jobList = new LinkedHashSet<>();
-        pageCounter++;
-        for (Element element : getPages()) {
+        Elements elements = Jsoup.parse(page).select(ROOT_QUERY);
+
+        for (Element element : elements) {
             String jobTitle = getTitle(element).toLowerCase();
             if (jobTitle.contains("java") && !jobTitle.contains("javascript") && !jobTitle.contains("java script")) {
-                jobList.add(createJob(element));
+                vacancyList.add(createJob(element));
             }
         }
-        return jobList;
+
+        return vacancyList;
     }
 
     /**
@@ -102,8 +91,8 @@ public class HtmlParserImpl implements HtmlParser {
      * @param element Element
      * @return созданная вакансия Job
      */
-    public Job createJob(Element element) {
-        return new Job(getUrl(element),
+    private Vacancy createJob(Element element) {
+        return new Vacancy(getUrl(element),
                 getTitle(element),
                 getSalary(element),
                 getCompanyName(element),
@@ -112,21 +101,12 @@ public class HtmlParserImpl implements HtmlParser {
     }
 
     /**
-     * Метод возвращает список элементов.
-     *
-     * @return список элементов для парсинга.
-     */
-    public Elements getPages() {
-        return webConnectionFactory.getConnection(pageCounter).select(ROOT_QUERY);
-    }
-
-    /**
      * Метод возвращает ссылку на вакансию.
      *
      * @param element Element url
      * @return ссылку в виде строки.
      */
-    public String getUrl(Element element) {
+    private String getUrl(Element element) {
         return element.select(URL_AND_TITLE_QUERY).attr(REF_ATTR);
     }
 
@@ -136,7 +116,7 @@ public class HtmlParserImpl implements HtmlParser {
      * @param element Element title
      * @return наименование вакансии в виде строки.
      */
-    public String getTitle(Element element) {
+    private String getTitle(Element element) {
         return element.select(URL_AND_TITLE_QUERY).text();
     }
 
@@ -146,7 +126,7 @@ public class HtmlParserImpl implements HtmlParser {
      * @param element Element salary
      * @return заработная плата в виде строки.
      */
-    public String getSalary(Element element) {
+    private String getSalary(Element element) {
         return element.select(SALARY_QUERY).text();
     }
 
@@ -156,7 +136,7 @@ public class HtmlParserImpl implements HtmlParser {
      * @param element Element companyName
      * @return наименование компании в виде строки.
      */
-    public String getCompanyName(Element element) {
+    private String getCompanyName(Element element) {
         return element.select(COMPANY_NAME_QUERY).text();
     }
 
@@ -166,7 +146,7 @@ public class HtmlParserImpl implements HtmlParser {
      * @param element Element location
      * @return место нахождения в виде строки.
      */
-    public String getLocation(Element element) {
+    private String getLocation(Element element) {
         return element.select(LOCATION_QUERY).text();
     }
 
@@ -176,7 +156,7 @@ public class HtmlParserImpl implements HtmlParser {
      * @param element Element date
      * @return дата публикации в виде даты.
      */
-    public Date getDate(Element element) {
+    private Date getDate(Element element) {
         String date = element.select(DATE_QUERY).text();
         DateConverter dc = new DateConverter();
         return dc.convertDate(date);

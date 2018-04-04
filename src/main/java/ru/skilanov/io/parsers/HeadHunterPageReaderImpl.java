@@ -1,14 +1,13 @@
 package ru.skilanov.io.parsers;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
 /**
  * Класс для соединения со страницей.
  */
-class WebConnectionFactory {
+public class HeadHunterPageReaderImpl implements PageReader {
     /**
      * Ссылка на сайт к которым происходит соединение.
      */
@@ -23,16 +22,16 @@ class WebConnectionFactory {
      * Метод соединения с сайтом в котором в переменной url происходит конкатинация строк для
      * смены страницы на следующую.
      *
-     * @param count int для смены страницы
-     * @return html документ
+     * @param pageNumber int для смены страницы
+     * @return страницу String
      */
-    protected Document getConnection(int count) {
-        String url = HH_URL.concat(String.valueOf(count));
+    public String readPage(int pageNumber) {
+        String url = HH_URL.concat(String.valueOf(pageNumber));
         try {
             return Jsoup
                     .connect(url)
                     .userAgent(AGENT)
-                    .get();
+                    .get().html();
         } catch (IOException e) {
             throw new RuntimeException("Get headhunter connection exception ", e);
         }

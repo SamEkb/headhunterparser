@@ -6,8 +6,43 @@ import java.util.Objects;
 /**
  * Класс модель вакансии.
  */
-public class Job {
+public class Vacancy {
+
+    /**
+     * Константа url.
+     */
+    public static final String COLUMN_URL = "url";
+
+    /**
+     * Константа title.
+     */
+    public static final String COLUMN_TITLE = "title";
+
+    /**
+     * Константа salary.
+     */
+    public static final String COLUMN_SALARY = "salary";
+
+    /**
+     * Константа company name.
+     */
+    public static final String COLUMN_COMPANY_NAME = "company_name";
+
+    /**
+     * Константа location.
+     */
+    public static final String COLUMN_LOCATION = "location";
+
+    /**
+     * Константа create date.
+     */
+    public static final String COLUMN_CREATE_DATE = "create_date";
+
+    /**
+     * Идентефикатор вакансии.
+     */
     private int id;
+
     /**
      * Ссылка на вакансию.
      */
@@ -33,7 +68,7 @@ public class Job {
      */
     private Date date;
 
-    public Job(int id, String url, String title, String salary, String companyName, String location, Date date) {
+    public Vacancy(int id, String url, String title, String salary, String companyName, String location, Date date) {
         this.id = id;
         this.url = url;
         this.title = title;
@@ -53,7 +88,7 @@ public class Job {
      * @param location    String
      * @param date        Date
      */
-    public Job(String url, String title, String salary, String companyName, String location, Date date) {
+    public Vacancy(String url, String title, String salary, String companyName, String location, Date date) {
         this.url = url;
         this.title = title;
         this.salary = salary;
@@ -62,12 +97,13 @@ public class Job {
         this.date = date;
     }
 
+    /**
+     * Геттер для id.
+     *
+     * @return int
+     */
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**
@@ -142,14 +178,14 @@ public class Job {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Job job = (Job) o;
-        return id == job.id &&
-                Objects.equals(url, job.url) &&
-                Objects.equals(title, job.title) &&
-                Objects.equals(salary, job.salary) &&
-                Objects.equals(companyName, job.companyName) &&
-                Objects.equals(location, job.location) &&
-                Objects.equals(date, job.date);
+        Vacancy vacancy = (Vacancy) o;
+        return id == vacancy.id &&
+                Objects.equals(url, vacancy.url) &&
+                Objects.equals(title, vacancy.title) &&
+                Objects.equals(salary, vacancy.salary) &&
+                Objects.equals(companyName, vacancy.companyName) &&
+                Objects.equals(location, vacancy.location) &&
+                Objects.equals(date, vacancy.date);
     }
 
     @Override
