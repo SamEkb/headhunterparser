@@ -1,0 +1,8 @@
+<dataset>
+    <JOB URL="https://ekaterinburg.hh.ru/vacancy/3" TITLE="Руководитель отдела разработки ПО" SALARY="60 000"
+         COMPANY_NAME="It tech" LOCATION="Екатеринбург" CREATE_DATE="2018-04-03 00:00:00"/>
+    <JOB URL="https://ekaterinburg.hh.ru/vacancy/2" TITLE="Тестировщик ПО" SALARY="20 000"
+         COMPANY_NAME="Fin tech" LOCATION="Екатеринбург" CREATE_DATE="2018-04-03 00:00:00"/>
+    <JOB URL="https://ekaterinburg.hh.ru/vacancy/1" TITLE="Java разработчик" SALARY="40 000"
+         COMPANY_NAME="Экстрим про" LOCATION="Екатеринбург" CREATE_DATE="2018-04-03 00:00:00"/>
+</dataset>

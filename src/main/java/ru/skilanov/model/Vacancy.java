@@ -1,4 +1,4 @@
-package ru.skilanov.io.model;
+package ru.skilanov.model;
 
 import java.util.Date;
 import java.util.Objects;

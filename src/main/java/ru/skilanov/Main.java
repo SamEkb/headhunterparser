@@ -1,10 +1,11 @@
-package ru.skilanov.io;
+package ru.skilanov;
 
 
-import ru.skilanov.io.database.VacancyDaoImpl;
-import ru.skilanov.io.model.Vacancy;
-import ru.skilanov.io.parsers.HeadHunterPageReaderImpl;
-import ru.skilanov.io.parsers.HeadHunterParserImpl;
+import ru.skilanov.database.ConnectionFactory;
+import ru.skilanov.database.VacancyDaoImpl;
+import ru.skilanov.model.Vacancy;
+import ru.skilanov.parsers.HeadHunterPageReaderImpl;
+import ru.skilanov.parsers.HeadHunterParserImpl;
 
 /**
  * Класс для запуска.
@@ -18,9 +19,8 @@ public class Main {
      */
     public static void main(String[] args) {
         HeadHunterPageReaderImpl parsConnection = new HeadHunterPageReaderImpl();
-        VacancyDaoImpl jd = new VacancyDaoImpl();
-
-        jd.openConnection();
+        ConnectionFactory factory = new ConnectionFactory();
+        VacancyDaoImpl jd = new VacancyDaoImpl(factory);
 
         jd.deleteAll();
 
@@ -36,7 +36,5 @@ public class Main {
         for (Vacancy vacancy : jd.findByCompanyName("ANCOR FinTech")) {
             System.out.println(vacancy);
         }
-
-        jd.closeConnection();
     }
 }

@@ -1,20 +1,18 @@
-package ru.skilanov.io.database;
+package ru.skilanov.database;
 
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 
 /**
  * Класс тестирует подключение к БД.
  */
-public class ConnectionPoolFactoryTest {
+public class ConnectionFactoryTest {
 
     /**
      * Connection.
@@ -24,9 +22,10 @@ public class ConnectionPoolFactoryTest {
     /**
      * Инициализация перед тестом.
      */
-    @Before
+    @BeforeClass
     public void setUp() throws SQLException {
-        connection = ConnectionPoolFactory.getInstance().getConnection();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        connection = connectionFactory.getConnection();
     }
 
     /**
@@ -44,6 +43,11 @@ public class ConnectionPoolFactoryTest {
      */
     @Test
     public void whenWeGetConnectionThenReturnRightResult() {
+        //
+
+        //
+
+
         assertNotNull(connection);
     }
 }

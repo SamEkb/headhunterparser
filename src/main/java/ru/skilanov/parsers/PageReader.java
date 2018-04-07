@@ -1,6 +1,4 @@
-package ru.skilanov.io.parsers;
-
-import org.jsoup.nodes.Document;
+package ru.skilanov.parsers;
 
 /**
  * Интерфейс содержащий метод для чтения html страницы.

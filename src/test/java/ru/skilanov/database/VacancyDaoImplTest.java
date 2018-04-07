@@ -1,4 +1,4 @@
-package ru.skilanov.io.database;
+package ru.skilanov.database;
 
 import org.junit.After;
 import org.junit.Before;
@@ -6,17 +6,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ru.skilanov.io.model.Vacancy;
+import ru.skilanov.model.Vacancy;
 
 import java.sql.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
@@ -30,7 +27,7 @@ public class VacancyDaoImplTest {
      * Фабрика подключений.
      */
     @Mock
-    private ConnectionPoolFactory connectionPoolFactory;
+    private ConnectionFactory connectionFactory;
 
     /**
      * Подключение.
@@ -68,10 +65,8 @@ public class VacancyDaoImplTest {
      */
     @Before
     public void setUp() throws SQLException {
-        vacancyDao.openConnection();
-
-        assertNotNull(connectionPoolFactory);
-        when(connectionPoolFactory.getConnection()).thenReturn(connection);
+        assertNotNull(connectionFactory);
+        when(connectionFactory.getConnection()).thenReturn(connection);
         when(connection.prepareStatement(any(String.class))).thenReturn(preparedStatement);
 
         Date jobDate = new GregorianCalendar(2018, Calendar.APRIL, 2).getTime();
@@ -87,14 +82,6 @@ public class VacancyDaoImplTest {
         when(resultSet.getString("location")).thenReturn(vacancy.getLocation());
         when(resultSet.getTimestamp("create_date")).thenReturn(Timestamp.valueOf("2018-04-02 00:00:00"));
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
-    }
-
-    /**
-     * После завершения тестов.
-     */
-    @After
-    public void afterTest() {
-        vacancyDao.closeConnection();
     }
 
     /**

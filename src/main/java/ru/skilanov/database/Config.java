@@ -1,4 +1,4 @@
-package ru.skilanov.io.database;
+package ru.skilanov.database;
 
 import java.io.FileInputStream;
 import java.io.IOException;

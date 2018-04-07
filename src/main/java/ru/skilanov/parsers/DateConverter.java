@@ -1,4 +1,4 @@
-package ru.skilanov.io.parsers;
+package ru.skilanov.parsers;
 
 import java.text.DateFormat;
 import java.text.ParseException;

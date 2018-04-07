@@ -1,4 +1,4 @@
-package ru.skilanov.io.exceptions;
+package ru.skilanov.exceptions;
 
 /**
  * Исключения dao.

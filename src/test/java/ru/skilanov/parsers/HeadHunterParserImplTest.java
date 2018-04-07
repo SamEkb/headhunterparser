@@ -1,4 +1,4 @@
-package ru.skilanov.io.parsers;
+package ru.skilanov.parsers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.Test;
-import ru.skilanov.io.model.Vacancy;
+import ru.skilanov.model.Vacancy;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

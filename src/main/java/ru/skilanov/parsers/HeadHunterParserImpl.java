@@ -1,14 +1,13 @@
-package ru.skilanov.io.parsers;
+package ru.skilanov.parsers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import ru.skilanov.io.model.Vacancy;
+import ru.skilanov.model.Vacancy;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Класс реализация интерйеса HtmlParser, который парсит вакансии.

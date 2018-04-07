@@ -1,6 +1,6 @@
-package ru.skilanov.io.parsers;
+package ru.skilanov.parsers;
 
-import ru.skilanov.io.model.Vacancy;
+import ru.skilanov.model.Vacancy;
 
 import java.util.Collection;
 

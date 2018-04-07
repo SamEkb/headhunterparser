@@ -1,17 +1,15 @@
-package ru.skilanov.io.parsers;
+package ru.skilanov.parsers;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Класс тестирует соединение с сатом.
  */
-public class WebConnectionPoolFactoryTest {
+public class WebConnectionFactoryTest {
     /**
      * Соединение с сайтом.
      */

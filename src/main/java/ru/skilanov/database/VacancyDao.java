@@ -1,6 +1,6 @@
-package ru.skilanov.io.database;
+package ru.skilanov.database;
 
-import ru.skilanov.io.model.Vacancy;
+import ru.skilanov.model.Vacancy;
 
 import java.util.List;
 
