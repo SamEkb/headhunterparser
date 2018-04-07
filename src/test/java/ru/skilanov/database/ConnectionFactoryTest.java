@@ -1,6 +1,7 @@
 package ru.skilanov.database;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,7 +23,7 @@ public class ConnectionFactoryTest {
     /**
      * Инициализация перед тестом.
      */
-    @BeforeClass
+    @Before
     public void setUp() throws SQLException {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connection = connectionFactory.getConnection();
@@ -31,7 +32,7 @@ public class ConnectionFactoryTest {
     /**
      * После завершения теста.
      *
-     * @throws SQLException
+     * @throws SQLException sqlexceprion
      */
     @After
     public void afterTest() throws SQLException {
@@ -43,11 +44,6 @@ public class ConnectionFactoryTest {
      */
     @Test
     public void whenWeGetConnectionThenReturnRightResult() {
-        //
-
-        //
-
-
         assertNotNull(connection);
     }
 }
