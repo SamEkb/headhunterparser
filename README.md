@@ -6,14 +6,9 @@ Java project
 
 Технологии::
 
-Java
-
-Jsoup
-
-JDBC
-
-PostgreSQL
-
-Junit
-
-Mockito
+1) Java
+2) Jsoup
+3) JDBC
+4) PostgreSQL
+5) Junit
+6) Mockito
