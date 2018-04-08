@@ -8,6 +8,7 @@ import java.util.Objects;
  */
 public class Vacancy {
 
+    public static final String ID = "id";
     /**
      * Константа url.
      */

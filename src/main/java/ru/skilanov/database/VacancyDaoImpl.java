@@ -56,7 +56,8 @@ public class VacancyDaoImpl implements VacancyDao {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(GET_ALL);
             while (rs.next()) {
-                jobsList.add(new Vacancy(rs.getString(Vacancy.COLUMN_URL),
+                jobsList.add(new Vacancy(rs.getInt(Vacancy.ID),
+                        rs.getString(Vacancy.COLUMN_URL),
                         rs.getString(Vacancy.COLUMN_TITLE),
                         rs.getString(Vacancy.COLUMN_SALARY),
                         rs.getString(Vacancy.COLUMN_COMPANY_NAME),
@@ -84,7 +85,8 @@ public class VacancyDaoImpl implements VacancyDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                jobsList.add(new Vacancy(rs.getString(Vacancy.COLUMN_URL),
+                jobsList.add(new Vacancy(rs.getInt(Vacancy.ID),
+                        rs.getString(Vacancy.COLUMN_URL),
                         rs.getString(Vacancy.COLUMN_TITLE),
                         rs.getString(Vacancy.COLUMN_SALARY),
                         rs.getString(Vacancy.COLUMN_COMPANY_NAME),
@@ -111,7 +113,8 @@ public class VacancyDaoImpl implements VacancyDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                return new Vacancy(rs.getString(Vacancy.COLUMN_URL),
+                return new Vacancy(rs.getInt(Vacancy.ID),
+                        rs.getString(Vacancy.COLUMN_URL),
                         rs.getString(Vacancy.COLUMN_TITLE),
                         rs.getString(Vacancy.COLUMN_SALARY),
                         rs.getString(Vacancy.COLUMN_COMPANY_NAME),
