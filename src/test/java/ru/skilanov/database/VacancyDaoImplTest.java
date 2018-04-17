@@ -10,6 +10,7 @@ import ru.skilanov.model.Vacancy;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 import static org.h2.engine.Constants.UTF8;
@@ -44,15 +45,15 @@ public class VacancyDaoImplTest {
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         vacancyDao = new VacancyDaoImpl(connectionFactory);
-        Date date = new GregorianCalendar(2018, Calendar.APRIL, 1).getTime();
-        Vacancy microsoft = new Vacancy(1, "www.somewhere.org", "C# developer",
-                "from 3000 usd", "Microsoft", "Los Angele's, California, USA", date);
-        vacancyDao.insert(microsoft);
     }
 
     @After
     public void tearDown() throws Exception {
         vacancyDao.deleteAll();
+        try (Connection connection = new ConnectionFactory().getConnection()) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("ALTER TABLE job ALTER COLUMN id RESTART WITH 1");
+        }
     }
 
     /**
@@ -61,13 +62,11 @@ public class VacancyDaoImplTest {
     @Test
     public void whenDeleteById_ThenItDeleted() {
         Date date = new GregorianCalendar(2018, Calendar.APRIL, 1).getTime();
-        Vacancy microsoftVacancy = new Vacancy( 1,"www.somewhere.org", "C# developer",
+        Vacancy microsoftVacancy = new Vacancy(1, "www.somewhere.org", "C# developer",
                 "from 3000 usd", "Microsoft", "Los Angele's, California, USA", date);
 
         vacancyDao.insert(microsoftVacancy);
         vacancyDao.deleteById(1);
-
-        System.out.println(4);
 
         assertNull(vacancyDao.findById(1));
     }
@@ -78,13 +77,13 @@ public class VacancyDaoImplTest {
     @Test
     public void whenDeleteAll_ThenItEmpty() {
         Date date = new GregorianCalendar(2018, Calendar.APRIL, 1).getTime();
-        Vacancy someVacancy = new Vacancy( 1,"www.somewhere.org", "C# developer",
+        Vacancy microsoftVacancy = new Vacancy(1, "www.somewhere.org", "C# developer",
                 "from 3000 usd", "Microsoft", "Los Angele's, California, USA", date);
-        Vacancy anotherVacancy = new Vacancy(2,"www.somewhere.org", "Java developer",
+        Vacancy oracleVacancy = new Vacancy(2, "www.somewhere.org", "Java developer",
                 "from 3000 usd", "Oracle", "Redwood City, California, USA", date);
 
-        vacancyDao.insert(someVacancy);
-        vacancyDao.insert(anotherVacancy);
+        vacancyDao.insert(microsoftVacancy);
+        vacancyDao.insert(oracleVacancy);
 
         vacancyDao.deleteAll();
 
@@ -97,19 +96,30 @@ public class VacancyDaoImplTest {
     @Test
     public void whenFindById_ThenReturnRightResult() {
         Date date = new GregorianCalendar(2018, Calendar.APRIL, 1).getTime();
-        Vacancy microsoft = new Vacancy(1, "www.somewhere.org", "C# developer",
+        Vacancy microsoftVacancy = new Vacancy(1, "www.somewhere.org", "C# developer",
                 "from 3000 usd", "Microsoft", "Los Angele's, California, USA", date);
 
-        //vacancyDao.insert(microsoft);
+        vacancyDao.insert(microsoftVacancy);
 
         Vacancy result = vacancyDao.findById(1);
 
-        System.out.println(result);
+        assertThat(microsoftVacancy, is(result));
+    }
 
-        System.out.println(3);
+    /**
+     * Метод тестирует поиск по наименованию компании.
+     */
+    @Test
+    public void whenFindByCompanyName_ThenReturnRightResult() {
+        Date date = new GregorianCalendar(2018, Calendar.APRIL, 1).getTime();
+        Vacancy microsoftVacancy = new Vacancy(1, "www.somewhere.org", "C# developer",
+                "from 3000 usd", "Microsoft", "Los Angele's, California, USA", date);
 
+        vacancyDao.insert(microsoftVacancy);
 
-        assertThat(microsoft, is(result));
+        List<Vacancy> vacancies = vacancyDao.findByCompanyName("Microsoft");
+
+        assertThat(vacancies.get(0).getCompanyName(), is(microsoftVacancy.getCompanyName()));
     }
 
     /**
@@ -118,10 +128,10 @@ public class VacancyDaoImplTest {
     @Test
     public void whenInsertNewVacancy_ThenItInserted() {
         Date jobDate = new GregorianCalendar(2018, Calendar.APRIL, 2).getTime();
-        Vacancy oracleVacancyOne = new Vacancy(1, "www.somewhere.org", "Java developer",
+        Vacancy oracleVacancy = new Vacancy(1, "www.somewhere.org", "Java developer",
                 "from 3000 usd", "Oracle", "Redwood City, California, USA", jobDate);
 
-        vacancyDao.insert(oracleVacancyOne);
+        vacancyDao.insert(oracleVacancy);
         assertNotNull(vacancyDao.getAll());
     }
 
@@ -132,14 +142,12 @@ public class VacancyDaoImplTest {
     public void whenGetAll_ThenGetAllVacancies() {
         List<Vacancy> vacancyList = new ArrayList<>();
         Date date = new GregorianCalendar(2018, Calendar.APRIL, 1).getTime();
-        Vacancy microsoftVacancys = new Vacancy(1,"www.somewhere.org", "C# developer",
+        Vacancy microsoftVacancy = new Vacancy(1, "www.somewhere.org", "C# developer",
                 "from 3000 usd", "Microsoft", "Los Angele's, California, USA", date);
-        vacancyList.add(microsoftVacancys);
+        vacancyList.add(microsoftVacancy);
 
-        //vacancyDao.insert(microsoftVacancys);
+        vacancyDao.insert(microsoftVacancy);
         List<Vacancy> result = vacancyDao.getAll();
-
-        System.out.println(1);
 
         assertArrayEquals(vacancyList.toArray(), result.toArray());
     }
