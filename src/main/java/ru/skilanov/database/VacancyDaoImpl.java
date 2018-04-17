@@ -30,8 +30,8 @@ public class VacancyDaoImpl implements VacancyDao {
      */
     @Override
     public void insert(Vacancy vacancy) {
-        try (Connection connection = connectionFactory.getConnection()) {
-            PreparedStatement ps = connection.prepareStatement(INSERT);
+        try (Connection connection = connectionFactory.getConnection();
+            PreparedStatement ps = connection.prepareStatement(INSERT)) {
             ps.setString(1, vacancy.getUrl());
             ps.setString(2, vacancy.getTitle());
             ps.setString(3, vacancy.getSalary());
@@ -52,8 +52,8 @@ public class VacancyDaoImpl implements VacancyDao {
     @Override
     public List<Vacancy> getAll() {
         List<Vacancy> jobsList = new ArrayList<>();
-        try (Connection connection = connectionFactory.getConnection()) {
-            Statement st = connection.createStatement();
+        try (Connection connection = connectionFactory.getConnection();
+            Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(GET_ALL);
             while (rs.next()) {
                 jobsList.add(new Vacancy(rs.getInt(Vacancy.ID),
@@ -79,8 +79,8 @@ public class VacancyDaoImpl implements VacancyDao {
     @Override
     public List<Vacancy> findByCompanyName(String name) {
         List<Vacancy> jobsList = new ArrayList<>();
-        try (Connection connection = connectionFactory.getConnection()) {
-            PreparedStatement ps = connection.prepareStatement(FIND_BY_COMPANY_NAME);
+        try (Connection connection = connectionFactory.getConnection();
+            PreparedStatement ps = connection.prepareStatement(FIND_BY_COMPANY_NAME)) {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
 
@@ -107,8 +107,8 @@ public class VacancyDaoImpl implements VacancyDao {
      */
     @Override
     public Vacancy findById(int id) {
-        try (Connection connection = connectionFactory.getConnection()) {
-            PreparedStatement ps = connection.prepareStatement(FIND_BY_ID);
+        try (Connection connection = connectionFactory.getConnection();
+            PreparedStatement ps = connection.prepareStatement(FIND_BY_ID)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
@@ -134,8 +134,8 @@ public class VacancyDaoImpl implements VacancyDao {
      */
     @Override
     public void deleteById(int id) {
-        try (Connection connection = connectionFactory.getConnection()) {
-            PreparedStatement ps = connection.prepareStatement(DELETE_BY_ID);
+        try (Connection connection = connectionFactory.getConnection();
+            PreparedStatement ps = connection.prepareStatement(DELETE_BY_ID)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException sqle) {
@@ -148,8 +148,8 @@ public class VacancyDaoImpl implements VacancyDao {
      */
     @Override
     public void deleteAll() {
-        try (Connection connection = connectionFactory.getConnection()) {
-            PreparedStatement ps = connection.prepareStatement(DELETE_ALL);
+        try (Connection connection = connectionFactory.getConnection();
+            PreparedStatement ps = connection.prepareStatement(DELETE_ALL)) {
             ps.executeUpdate();
         } catch (SQLException sqle) {
             throw new DaoException("Method deleteAll has thrown an exception", sqle);

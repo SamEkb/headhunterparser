@@ -12,3 +12,5 @@ Java project
 4) PostgreSQL
 5) Junit
 6) Mockito
+7) H2 database
+8) DBUnit

@@ -5,5 +5,5 @@ create table if not exists job (
   salary varchar,
   company_name varchar,
   location varchar,
-  create_date timestamp
+  create_date TIMESTAMP
 )
