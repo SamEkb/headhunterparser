@@ -22,8 +22,8 @@ public class HeadHunterPageReaderImpl implements PageReader {
      * Метод соединения с сайтом в котором в переменной url происходит конкатинация строк для
      * смены страницы на следующую.
      *
-     * @param pageNumber int для смены страницы
-     * @return страницу String
+     * @param pageNumber int для смены страницы.
+     * @return страницу String.
      */
     public String readPage(int pageNumber) {
         String url = HH_URL.concat(String.valueOf(pageNumber));

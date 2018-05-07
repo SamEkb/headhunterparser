@@ -5,7 +5,7 @@ import ru.skilanov.model.Vacancy;
 import java.util.List;
 
 /**
- * Интерфейс содержащий методы для работы с объектами класса Job
+ * Интерфейс содержащий методы для работы с объектами класса Job.
  */
 public interface VacancyDao {
 

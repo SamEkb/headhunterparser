@@ -5,10 +5,14 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Класс настроек к базе данныхю
+ * Класс настроек к базе данныхю.
  */
 public class Config {
 
+    /**
+     * Путь к файлу конфигурации.
+     */
+    private static final String PATH = "src\\main\\resources\\config.properties";
     /**
      * Свойства.
      */
@@ -19,7 +23,7 @@ public class Config {
      */
     public void load() {
         try {
-            String path = "src\\main\\resources\\config.properties";
+            String path = PATH;
             FileInputStream fis = new FileInputStream(path);
             properties.load(fis);
         } catch (IOException e) {

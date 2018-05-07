@@ -10,7 +10,12 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
     /**
-     *
+     * Константная строка.
+     */
+    private static final String NOT_FOUND_CLASS = "Not found class ";
+
+    /**
+     * Конструктор.
      */
     public ConnectionFactory() {
         Config config = new Config();
@@ -18,7 +23,7 @@ public class ConnectionFactory {
         try {
             Class.forName(config.getDriver());
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Not found class " + config.getDriver(), e);
+            throw new RuntimeException(NOT_FOUND_CLASS + config.getDriver(), e);
         }
     }
 

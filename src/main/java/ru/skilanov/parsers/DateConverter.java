@@ -15,18 +15,22 @@ public class DateConverter {
      * Константа регулярное выражение.
      */
     private static final String REGEX = "[\\u00A0\\s]+";
+    /**
+     * Формат даты.
+     */
+    private static final String DATE_FORMAT = "d MMMM yyyy";
 
     /**
      * Метод преобразовывает строку в дату.
      *
-     * @param date в виде строки
+     * @param date в виде строки.
      * @return преобразованную дату.
      */
     public Date convertDate(String date) {
         Calendar calendar = Calendar.getInstance();
         String year = String.valueOf(calendar.get(Calendar.YEAR));
         String str = String.format("%s %s %s", getDay(date), getMonth(date), year);
-        DateFormat format = new SimpleDateFormat("d MMMM yyyy");
+        DateFormat format = new SimpleDateFormat(DATE_FORMAT);
         try {
             return format.parse(str);
         } catch (ParseException e) {
